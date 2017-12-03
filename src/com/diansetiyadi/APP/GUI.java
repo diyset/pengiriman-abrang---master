@@ -12,6 +12,7 @@ import com.diansetiyadi.Model.Pengirim;
 import com.diansetiyadi.Model.Tarif;
 import com.diansetiyadi.Model.provinsiKota;
 import com.diansetiyadi.Model.resiGenerator;
+import com.sun.glass.events.KeyEvent;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -169,6 +170,11 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setSize(new java.awt.Dimension(0, 0));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Pengirim", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
 
@@ -207,6 +213,12 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane3.setViewportView(textAreaAlamatPengirim);
 
         jLabel22.setText("Telephone");
+
+        textTelephonePengirim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textTelephonePengirimKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -314,6 +326,17 @@ public class GUI extends javax.swing.JFrame {
                 textKotaPenerimaActionPerformed(evt);
             }
         });
+        textKotaPenerima.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textKotaPenerimaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textKotaPenerimaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textKotaPenerimaKeyTyped(evt);
+            }
+        });
 
         jLabel26.setText("Kota");
 
@@ -328,6 +351,12 @@ public class GUI extends javax.swing.JFrame {
         textAreaAlamatPenerima.setColumns(20);
         textAreaAlamatPenerima.setRows(5);
         jScrollPane4.setViewportView(textAreaAlamatPenerima);
+
+        textTelephonePenerima.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textTelephonePenerimaKeyTyped(evt);
+            }
+        });
 
         jLabel29.setText("Telephone");
 
@@ -467,11 +496,21 @@ public class GUI extends javax.swing.JFrame {
                 textBeratBarang1ActionPerformed(evt);
             }
         });
+        textBeratBarang1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textBeratBarang1KeyTyped(evt);
+            }
+        });
         panelDataPengiriman.add(textBeratBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 166, 34, -1));
 
         textDimensiPanjang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textDimensiPanjangActionPerformed(evt);
+            }
+        });
+        textDimensiPanjang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textDimensiPanjangKeyTyped(evt);
             }
         });
         panelDataPengiriman.add(textDimensiPanjang, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 235, 45, -1));
@@ -481,11 +520,21 @@ public class GUI extends javax.swing.JFrame {
                 textDimensiTinggiActionPerformed(evt);
             }
         });
+        textDimensiTinggi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textDimensiTinggiKeyTyped(evt);
+            }
+        });
         panelDataPengiriman.add(textDimensiTinggi, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 266, 45, -1));
 
         textDimensiLebar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textDimensiLebarActionPerformed(evt);
+            }
+        });
+        textDimensiLebar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textDimensiLebarKeyTyped(evt);
             }
         });
         panelDataPengiriman.add(textDimensiLebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 300, 45, -1));
@@ -514,6 +563,11 @@ public class GUI extends javax.swing.JFrame {
         textHargaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textHargaBarangActionPerformed(evt);
+            }
+        });
+        textHargaBarang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textHargaBarangKeyTyped(evt);
             }
         });
         panelDataPengiriman.add(textHargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 417, 162, -1));
@@ -666,7 +720,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonClear)
                     .addComponent(buttonSubmit))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         menuNewDelivery.setText("File");
@@ -823,6 +877,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void textDimensiPanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDimensiPanjangActionPerformed
         // TODO add your handling code here:
+
+
     }//GEN-LAST:event_textDimensiPanjangActionPerformed
 
     private void textDimensiTinggiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDimensiTinggiActionPerformed
@@ -973,6 +1029,119 @@ public class GUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Soon");
     }//GEN-LAST:event_menuItemPrintActionPerformed
 
+    private void textTelephonePengirimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTelephonePengirimKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0')
+                && (karakter <= '9')
+                || (karakter == KeyEvent.VK_BACKSPACE)
+                || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textTelephonePengirimKeyTyped
+
+    private void textTelephonePenerimaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTelephonePenerimaKeyTyped
+        // TODO add your handling code here:
+        char number = evt.getKeyChar();
+        if (!(((number >= '0')
+                && (number <= '9')
+                || (number == KeyEvent.VK_BACKSPACE)
+                || (number == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textTelephonePenerimaKeyTyped
+
+    private void textBeratBarang1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBeratBarang1KeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0')
+                && (karakter <= '9')
+                || (karakter == KeyEvent.VK_BACKSPACE)
+                || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textBeratBarang1KeyTyped
+
+    private void textHargaBarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textHargaBarangKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0')
+                && (karakter <= '9')
+                || (karakter == KeyEvent.VK_BACKSPACE)
+                || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textHargaBarangKeyTyped
+
+    private void textDimensiLebarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDimensiLebarKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0')
+                && (karakter <= '9')
+                || (karakter == KeyEvent.VK_BACKSPACE)
+                || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textDimensiLebarKeyTyped
+
+    private void textDimensiTinggiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDimensiTinggiKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0')
+                && (karakter <= '9')
+                || (karakter == KeyEvent.VK_BACKSPACE)
+                || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textDimensiTinggiKeyTyped
+
+    private void textDimensiPanjangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDimensiPanjangKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0')
+                && (karakter <= '9')
+                || (karakter == KeyEvent.VK_BACKSPACE)
+                || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
+            evt.consume();
+        }
+    }//GEN-LAST:event_textDimensiPanjangKeyTyped
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formMouseClicked
+
+    private void textKotaPenerimaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKotaPenerimaKeyTyped
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_textKotaPenerimaKeyTyped
+
+    private void textKotaPenerimaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKotaPenerimaKeyPressed
+        // TODO add your handling code here:
+     
+   
+    }//GEN-LAST:event_textKotaPenerimaKeyPressed
+
+    private void textKotaPenerimaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKotaPenerimaKeyReleased
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_textKotaPenerimaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1010,6 +1179,7 @@ public class GUI extends javax.swing.JFrame {
         //buttonGroupAsuransi
         rbtnSetuju.setEnabled(false);
         rbtnTidak.setEnabled(false);
+
     }
 
     public void isPelayanan() {
@@ -1342,7 +1512,7 @@ public class GUI extends javax.swing.JFrame {
         //buttonGroupAsuransi
         rbtnSetuju.setEnabled(true);
         rbtnTidak.setEnabled(true);
-        
+
         dateTanggalPengiriman.setDate(Date.from(Instant.now()));
 
     }
