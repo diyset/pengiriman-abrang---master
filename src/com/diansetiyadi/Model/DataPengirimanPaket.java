@@ -23,7 +23,7 @@ public class DataPengirimanPaket {
     private String pembayaran;
     private String namaBarang;
     private String lamaPengiriman;
-    private String tanggalPengiriman;
+    private Date tanggalPengiriman;
 
     /**
      * @return the nomorPaket
@@ -182,14 +182,14 @@ public class DataPengirimanPaket {
     /**
      * @return the tanggalPengiriman
      */
-    public String getTanggalPengiriman() {
+    public Date getTanggalPengiriman() {
         return tanggalPengiriman;
     }
 
     /**
      * @param tanggalPengiriman the tanggalPengiriman to set
      */
-    public void setTanggalPengiriman(String tanggalPengiriman) {
+    public void setTanggalPengiriman(Date tanggalPengiriman) {
         this.tanggalPengiriman = tanggalPengiriman;
     }
     
