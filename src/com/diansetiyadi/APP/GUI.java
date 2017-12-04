@@ -36,11 +36,9 @@ public class GUI extends javax.swing.JFrame {
     DataPengirimanPaket dpk = new DataPengirimanPaket();
     TarifFileDAO tfd = new TarifFileDAO();
     provinsiKota provinsikota = new provinsiKota();
-    //provinsiKota[] provinsikotas;
 
     public GUI() {
         initComponents();
-        // tfd.findKota();
         tfd.findTarif();
         tarif.setPengirim(pengirim);
         insurance.setDpk(dpk);
@@ -132,7 +130,7 @@ public class GUI extends javax.swing.JFrame {
         textAsuransiPercent = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         labelNamaBarang = new javax.swing.JLabel();
-        textTujuanPengirim = new javax.swing.JTextField();
+        textTujuanPengirimDataTujuan = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -595,15 +593,15 @@ public class GUI extends javax.swing.JFrame {
         labelNamaBarang.setText("Nama Barang");
         panelDataPengiriman.add(labelNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 138, -1, -1));
 
-        textTujuanPengirim.setEditable(false);
-        textTujuanPengirim.setBackground(new java.awt.Color(102, 102, 102));
-        textTujuanPengirim.setForeground(new java.awt.Color(255, 255, 255));
-        textTujuanPengirim.addActionListener(new java.awt.event.ActionListener() {
+        textTujuanPengirimDataTujuan.setEditable(false);
+        textTujuanPengirimDataTujuan.setBackground(new java.awt.Color(102, 102, 102));
+        textTujuanPengirimDataTujuan.setForeground(new java.awt.Color(255, 255, 255));
+        textTujuanPengirimDataTujuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textTujuanPengirimActionPerformed(evt);
+                textTujuanPengirimDataTujuanActionPerformed(evt);
             }
         });
-        panelDataPengiriman.add(textTujuanPengirim, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 75, 151, -1));
+        panelDataPengiriman.add(textTujuanPengirimDataTujuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 75, 151, -1));
 
         jLabel14.setText("CM");
         panelDataPengiriman.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 238, -1, -1));
@@ -920,9 +918,9 @@ public class GUI extends javax.swing.JFrame {
         isAsuransiVisible();
     }//GEN-LAST:event_rbtnTidakActionPerformed
 
-    private void textTujuanPengirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTujuanPengirimActionPerformed
+    private void textTujuanPengirimDataTujuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTujuanPengirimDataTujuanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textTujuanPengirimActionPerformed
+    }//GEN-LAST:event_textTujuanPengirimDataTujuanActionPerformed
 
     private void comboJenisBarangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboJenisBarangItemStateChanged
         // TODO add your handling code here:
@@ -1000,6 +998,7 @@ public class GUI extends javax.swing.JFrame {
         fillButtonCalculate();
         isAsuransiCalculate();
         isPelayananButtonCalculate();
+
     }//GEN-LAST:event_buttonCalculateActionPerformed
 
     private void menuItemSimulasiHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSimulasiHargaActionPerformed
@@ -1133,13 +1132,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void textKotaPenerimaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKotaPenerimaKeyPressed
         // TODO add your handling code here:
-     
-   
+
+
     }//GEN-LAST:event_textKotaPenerimaKeyPressed
 
     private void textKotaPenerimaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKotaPenerimaKeyReleased
         // TODO add your handling code here:
-    
+
     }//GEN-LAST:event_textKotaPenerimaKeyReleased
 
     /**
@@ -1195,7 +1194,8 @@ public class GUI extends javax.swing.JFrame {
             dpk.setLamaPengiriman("3 - 4 Hari Pengiriman");
 
             dpk.setJenisLayanan("Reguler");
-            textNomorPaket.setText(resiGenerator.generateResiNumber() + "REG");
+            dpk.setKodeLayanan("REG");
+            //textNomorPaket.setText(resiGenerator.generateResiNumber() + "REG");
 
         } else if (comboJenisLayanan.getSelectedItem().equals("Kilat")) {
             tarif.hargaPaketKilat();
@@ -1207,8 +1207,8 @@ public class GUI extends javax.swing.JFrame {
             dpk.setLamaPengiriman("1 - 2 Hari Pengiriman");
 
             dpk.setJenisLayanan("Kilat");
+            dpk.setKodeLayanan("KLT");
 
-            textNomorPaket.setText(resiGenerator.generateResiNumber() + "KLT");
         } else if (comboJenisLayanan.getSelectedItem().equals("SDS")) {
             tarif.hargaPaketSDS();
             tarif.setOngkirBarang();
@@ -1219,8 +1219,7 @@ public class GUI extends javax.swing.JFrame {
             dpk.setLamaPengiriman("Sampai Pada Hari Yang Sama");
 
             dpk.setJenisLayanan("SDS");
-
-            textNomorPaket.setText(resiGenerator.generateResiNumber() + "SDS");
+            dpk.setKodeLayanan("SDS");
         } else if (comboJenisLayanan.getSelectedItem().equals("ONS")) {
             tarif.hargaPaketONS();
             tarif.setOngkirBarang();
@@ -1231,8 +1230,7 @@ public class GUI extends javax.swing.JFrame {
             dpk.setLamaPengiriman("(One Night Service) Sampai Besok Pagi");
 
             dpk.setJenisLayanan("ONS");
-
-            textNomorPaket.setText(resiGenerator.generateResiNumber() + "ONS");
+            dpk.setKodeLayanan("ONS");
         } else if (comboJenisLayanan.getSelectedItem().equals("HDS")) {
             tarif.hargaPaketHDS();
             tarif.setOngkirBarang();
@@ -1243,8 +1241,7 @@ public class GUI extends javax.swing.JFrame {
             dpk.setLamaPengiriman("(Holiday Service) Pengiriman Di Hari libur");
 
             dpk.setJenisLayanan("HDS");
-
-            textNomorPaket.setText(resiGenerator.generateResiNumber() + "HDS");
+            dpk.setKodeLayanan("HDS");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Tujuan Tidak Ditemukan Di System");
         }
@@ -1319,12 +1316,8 @@ public class GUI extends javax.swing.JFrame {
             tarif.setAsuransi(true);
             setHargaBarangVisible(true);
 
-            try {
-                dpk.setHargaBarang(Double.parseDouble(textHargaBarang.getText()));
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(rootPane, "Mohon Masukan Harga Barang");
-            }
+            dpk.setHargaBarang(Double.parseDouble(textHargaBarang.getText()));
+
             insurance.setInsuranceCetak("YES");
         } else if (rbtnTidak.isSelected()) {
 
@@ -1365,14 +1358,21 @@ public class GUI extends javax.swing.JFrame {
 
     public void fillButtonSubmit() {
 
-        try {
-            tarif.getPengirim().setBeratBarang(Integer.parseInt(textBeratBarang1.getText()));
-        } catch (NumberFormatException a) {
-            JOptionPane.showMessageDialog(rootPane, "Masukan Angka Pada Berat Barang");
+        if (textBeratBarang1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Masukan Berat Barang!");
+        } else if (textTujuanPengirimDataTujuan.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Kota Tujuan Belum Ter Isi!");
+        } else if (rbtnSetuju.isSelected()) {
+            if (textHargaBarang.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Masukan Harga Barang");
+            } 
+        } else {
+             textNomorPaket.setText(resiGenerator.generateResiNumber() + dpk.getKodeLayanan());
         }
+        tarif.getPengirim().setBeratBarang(Integer.parseInt(textBeratBarang1.getText()));
 
         try {
-            tarif.setKota(textTujuanPengirim.getText());
+            tarif.setKota(textTujuanPengirimDataTujuan.getText());
         } catch (Exception err) {
             JOptionPane.showMessageDialog(rootPane, "Kota Tujuan Tidak Ada Pada System");
         }
@@ -1395,12 +1395,14 @@ public class GUI extends javax.swing.JFrame {
             tarif.getPengirim().setBeratBarang(Integer.parseInt(textBeratBarang1.getText()));
         } catch (NumberFormatException a) {
             JOptionPane.showMessageDialog(rootPane, "Masukan Angka Pada Berat Barang");
+            return;
         }
 
         try {
-            tarif.setKota(textTujuanPengirim.getText());
+            tarif.setKota(textTujuanPengirimDataTujuan.getText());
         } catch (Exception err) {
             JOptionPane.showMessageDialog(rootPane, "Kota Tujuan Tidak Ada Pada System");
+            return;
         }
 
     }
@@ -1537,35 +1539,35 @@ public class GUI extends javax.swing.JFrame {
     public void setProvinsiKotaPenerima() {
         if (textKotaPenerima.getText().equalsIgnoreCase("bandung")) {
             textProvinsiPenerima.setText("JAWA BARAT");
-            textTujuanPengirim.setText("Bandung");
+            textTujuanPengirimDataTujuan.setText("Bandung");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("surabaya")) {
             textProvinsiPenerima.setText("JAWA TIMUR");
-            textTujuanPengirim.setText("Surabaya");
+            textTujuanPengirimDataTujuan.setText("Surabaya");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("tasikmalaya")) {
             textProvinsiPenerima.setText("JAWA TENGAH");
-            textTujuanPengirim.setText("TasikMalaya");
+            textTujuanPengirimDataTujuan.setText("TasikMalaya");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("yogyakarta")) {
             textProvinsiPenerima.setText("JAWA TENGAH");
-            textTujuanPengirim.setText("Yogyakarta");
+            textTujuanPengirimDataTujuan.setText("Yogyakarta");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("medan")) {
             textProvinsiPenerima.setText("SUMATERA UTARA");
-            textTujuanPengirim.setText("Medan");
+            textTujuanPengirimDataTujuan.setText("Medan");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("tanggerang")) {
             textProvinsiPenerima.setText("JAWA BARAT");
-            textTujuanPengirim.setText("Tanggerang");
+            textTujuanPengirimDataTujuan.setText("Tanggerang");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("malang")) {
             textProvinsiPenerima.setText("JAWA TIMUR");
-            textTujuanPengirim.setText("Malang");
+            textTujuanPengirimDataTujuan.setText("Malang");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("semarang")) {
             textProvinsiPenerima.setText("JAWA TENGAH");
-            textTujuanPengirim.setText("Semarang");
+            textTujuanPengirimDataTujuan.setText("Semarang");
         } else if (textKotaPenerima.getText().equalsIgnoreCase("timika")) {
             textProvinsiPenerima.setText("PAPUA");
-            textTujuanPengirim.setText("Timika");
+            textTujuanPengirimDataTujuan.setText("Timika");
 
         } else if (textKotaPenerima.getText().equalsIgnoreCase("")) {
             textProvinsiPenerima.setText("");
-            textTujuanPengirim.setText("");
+            textTujuanPengirimDataTujuan.setText("");
 
         } else {
             JOptionPane.showMessageDialog(textKodePosPenerima, "Kota Tidak Ditemukan Di System");
@@ -1573,6 +1575,12 @@ public class GUI extends javax.swing.JFrame {
     }
 
     public void setResultPengiriman() {
+//        if (textBeratBarang1.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(rootPane, "Masukan Berat Barang");
+//        } else {
+//
+//            textNomorPaket.setText(resiGenerator.generateResiNumber() + dpk.getKodeLayanan());
+//        }
         textAreaDetailPembelian.setText("Nama Pengirim : " + pengirim.getNama() + "\n"
                 + "Kota Tujuan : " + tarif.getKota() + "\n"
                 + "Nama Barang : " + dpk.getNamaBarang() + "\n"
@@ -1582,6 +1590,7 @@ public class GUI extends javax.swing.JFrame {
                 + "Asuransi : " + insurance.getInsuranceCetak() + "\n"
                 + "Tanggal Kirim : " + dateformat.format(dpk.getTanggalPengiriman()) + "\n"
                 + "Pembayaran : " + dpk.getPembayaran());
+    
     }
 
     public static void main(String args[]) {
@@ -1595,16 +1604,24 @@ public class GUI extends javax.swing.JFrame {
                 if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1711,6 +1728,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField textProvinsiPengirim;
     private javax.swing.JTextField textTelephonePenerima;
     private javax.swing.JTextField textTelephonePengirim;
-    private javax.swing.JTextField textTujuanPengirim;
+    private javax.swing.JTextField textTujuanPengirimDataTujuan;
     // End of variables declaration//GEN-END:variables
 }
