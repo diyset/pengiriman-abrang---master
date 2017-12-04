@@ -1361,6 +1361,17 @@ public class GUI extends javax.swing.JFrame {
         textJumlah.setText("0");
         textProvinsiPengirim.setText("");
         textHargaBarang.setText("0");
+        
+        textAreaDetailPembelian.setText("Nama Pengirim : " + "\n"
+                + "Kota Tujuan : "  + "\n"
+                + "Nama Barang : "  + "\n"
+                + "Berat Barang : "  + "\n"
+                + "Lama Pengiriman : " + "\n"
+                + "Jenis Pelayanan : " + "\n"
+                + "Asuransi : "  + "\n"
+                + "Tanggal Kirim : "  + "\n"
+                + "Pembayaran : " );
+        textNomorPaket.setText("");
     }
     
     public void setHargaBarangVisible(Boolean vis) {
