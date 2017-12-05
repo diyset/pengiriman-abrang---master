@@ -12,9 +12,10 @@ import java.util.Date;
  * @author user
  */
 public class DataPengirimanPaket {
+
     private int nomorPaket;
     private String kotaTujuan;
-    private String  jenisBarang;
+    private String jenisBarang;
     private int beratBarang;
     private Date tanggalKirim;
     private String jenisLayanan;
@@ -24,6 +25,7 @@ public class DataPengirimanPaket {
     private String namaBarang;
     private String lamaPengiriman;
     private Date tanggalPengiriman;
+    private String kodeLayanan;
 
     /**
      * @return the nomorPaket
@@ -192,5 +194,19 @@ public class DataPengirimanPaket {
     public void setTanggalPengiriman(Date tanggalPengiriman) {
         this.tanggalPengiriman = tanggalPengiriman;
     }
-    
+
+    /**
+     * @return the kodeLayanan
+     */
+    public String getKodeLayanan() {
+        return kodeLayanan;
+    }
+
+    /**
+     * @param kodeLayanan the kodeLayanan to set
+     */
+    public void setKodeLayanan(String kodeLayanan) {
+        this.kodeLayanan = kodeLayanan;
+    }
+
 }

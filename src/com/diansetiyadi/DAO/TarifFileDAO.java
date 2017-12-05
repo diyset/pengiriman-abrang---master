@@ -52,6 +52,36 @@ public class TarifFileDAO {
 
     }
 
+    public static List<Tarif> getListFile() {
+        //  Tarif tarif = new Tarif();
+        List<Tarif> paketList = new ArrayList<>();
+        try {
+            Scanner scan;
+
+            // scan = new Scanner(new File("E:/tarifData.txt"));
+            scan = new Scanner(new File(TarifFileDAO.class.getResource("/com/diansetiyadi/asset/tarifData.txt").getFile()));
+            while (scan.hasNextLine()) {
+                String barisFile = scan.nextLine();
+                String[] dataTarif = barisFile.split(",");
+                String kota = (dataTarif[0]);
+
+                String tarifReguler = (dataTarif[1]);
+                String tarifKilat = (dataTarif[2]);
+                String tarifSDS = (dataTarif[3]);
+                String tarifONS = (dataTarif[4]);
+                String tarifHDS = (dataTarif[5]);
+                Tarif tarif = new Tarif(kota, tarifReguler, tarifKilat,
+                        tarifSDS, tarifONS, tarifHDS);
+                paketList.add(tarif);
+            }
+
+        } catch (FileNotFoundException e) {
+
+        }
+        return paketList;
+
+    }
+
     /**
      * @return the listTarif
      */
@@ -70,6 +100,5 @@ public class TarifFileDAO {
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
 }

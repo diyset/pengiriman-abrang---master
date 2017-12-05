@@ -13,6 +13,7 @@ import com.diansetiyadi.Model.Tarif;
 import com.diansetiyadi.Model.provinsiKota;
 import com.diansetiyadi.Model.resiGenerator;
 import com.sun.glass.events.KeyEvent;
+import java.awt.JobAttributes;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -37,20 +38,20 @@ public class GUI extends javax.swing.JFrame {
     DataPengirimanPaket dpk = new DataPengirimanPaket();
     TarifFileDAO tfd = new TarifFileDAO();
     provinsiKota provinsikota = new provinsiKota();
-    
+
     public GUI() {
         initComponents();
         tfd.findTarif();
         tarif.setPengirim(pengirim);
         insurance.setDpk(dpk);
         tarif.setInsurance(insurance);
-        
+
         textAsuransiPercent.setText("" + insurance.getInsurancepercent());
         setHargaBarangInvisible();
         setNamaBarangInvisible();
         defaultMenu();
         isiComboKota();
-        
+
     }
 
     /**
@@ -60,7 +61,7 @@ public class GUI extends javax.swing.JFrame {
      */
     DecimalFormat df = new DecimalFormat("'Rp'###,###.##");
     SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM yyyy");
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -659,6 +660,11 @@ public class GUI extends javax.swing.JFrame {
         imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/diansetiyadi/asset/logo tugas.png"))); // NOI18N
 
         buttonClear.setText("Clear");
+        buttonClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonClearMouseClicked(evt);
+            }
+        });
         buttonClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonClearActionPerformed(evt);
@@ -666,6 +672,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         buttonSubmit.setText("Submit");
+        buttonSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonSubmitMouseClicked(evt);
+            }
+        });
         buttonSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSubmitActionPerformed(evt);
@@ -915,7 +926,7 @@ public class GUI extends javax.swing.JFrame {
     private void menuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNewActionPerformed
         // TODO add your handling code here:
         setNewDeliveryVisible();
-        
+
 
     }//GEN-LAST:event_menuItemNewActionPerformed
 
@@ -949,7 +960,7 @@ public class GUI extends javax.swing.JFrame {
     private void menuItemSimulasiHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSimulasiHargaActionPerformed
         // TODO add your handling code here:
         setSimulasiHargaMenuVisible();
-        
+
 
     }//GEN-LAST:event_menuItemSimulasiHargaActionPerformed
 
@@ -1061,11 +1072,13 @@ public class GUI extends javax.swing.JFrame {
             getToolkit().beep();
             JOptionPane.showMessageDialog(rootPane, "Masukkan Angka");
             evt.consume();
+
         }
     }//GEN-LAST:event_textDimensiPanjangKeyTyped
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
+//        JOptionPane.showConfirmDialog(rootPane, "Test");
 
     }//GEN-LAST:event_formMouseClicked
 
@@ -1073,7 +1086,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         setProvinsiKotaPenerima();
         textTujuanPengirimDataTujuan.setText(comboKotaTujuan.getSelectedItem().toString().toUpperCase());
-        
+
 
     }//GEN-LAST:event_comboKotaTujuanActionPerformed
 
@@ -1086,6 +1099,16 @@ public class GUI extends javax.swing.JFrame {
         setProvinsiKotaPengirim();
     }//GEN-LAST:event_comboKotaPengirimActionPerformed
 
+    private void buttonSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSubmitMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_buttonSubmitMouseClicked
+
+    private void buttonClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClearMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_buttonClearMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1094,7 +1117,7 @@ public class GUI extends javax.swing.JFrame {
         rbtnTidak.setSelected(true);
         textAsuransiPercent.setVisible(false);
         buttonCalculate.setVisible(false);
-        buttonSubmit.setEnabled(false);
+        buttonSubmit.setEnabled(true);
         buttonClear.setEnabled(false);
         textNamaPenerima.setEnabled(false);
         textNamaPengirim.setEnabled(false);
@@ -1112,7 +1135,7 @@ public class GUI extends javax.swing.JFrame {
         textAreaAlamatPengirim.setEnabled(false);
         textProvinsiPengirim.setEnabled(false);
         textAreaAlamatPenerima.setEnabled(false);
-
+       
         //Panel Data Pengiriman
         //textGroupDimensi Barang
         dateTanggalPengiriman.setEnabled(false);
@@ -1123,21 +1146,21 @@ public class GUI extends javax.swing.JFrame {
         //buttonGroupAsuransi
         rbtnSetuju.setEnabled(false);
         rbtnTidak.setEnabled(false);
-        
+
     }
-    
+
     public void isPelayanan() {
-        
+
         if (comboJenisLayanan.getSelectedItem().equals("Reguler")) {
-            
+
             tarif.setOngkirBarang();
             tarif.hargaPaketReguler();
             tarif.setTotalHargaAfterInsurance();
             //  labelAsuransi.setText("" + insurance.calculateInsuranceBarang());
             textJumlah.setText("" + df.format(tarif.getTotalHargaAfterInsurance()));
-            
+
             dpk.setLamaPengiriman("3 - 4 Hari Pengiriman");
-            
+
             dpk.setJenisLayanan("Reguler");
             dpk.setKodeLayanan("REG");
             //textNomorPaket.setText(resiGenerator.generateResiNumber() + "REG");
@@ -1146,56 +1169,56 @@ public class GUI extends javax.swing.JFrame {
             tarif.hargaPaketKilat();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             textJumlah.setText("" + df.format(tarif.getTotalHargaAfterInsurance()));
-            
+
             dpk.setLamaPengiriman("1 - 2 Hari Pengiriman");
-            
+
             dpk.setJenisLayanan("Kilat");
             dpk.setKodeLayanan("KLT");
-            
+
         } else if (comboJenisLayanan.getSelectedItem().equals("SDS")) {
             tarif.hargaPaketSDS();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             textJumlah.setText("" + df.format(tarif.getTotalHargaAfterInsurance()));
-            
+
             dpk.setLamaPengiriman("Sampai Pada Hari Yang Sama");
-            
+
             dpk.setJenisLayanan("SDS");
             dpk.setKodeLayanan("SDS");
         } else if (comboJenisLayanan.getSelectedItem().equals("ONS")) {
             tarif.hargaPaketONS();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             textJumlah.setText("" + df.format(tarif.getTotalHargaAfterInsurance()));
-            
+
             dpk.setLamaPengiriman("(One Night Service) Sampai Besok Pagi");
-            
+
             dpk.setJenisLayanan("ONS");
             dpk.setKodeLayanan("ONS");
         } else if (comboJenisLayanan.getSelectedItem().equals("HDS")) {
             tarif.hargaPaketHDS();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             textJumlah.setText("" + df.format(tarif.getTotalHargaAfterInsurance()));
-            
+
             dpk.setLamaPengiriman("(Holiday Service) Pengiriman Di Hari libur");
-            
+
             dpk.setJenisLayanan("HDS");
             dpk.setKodeLayanan("HDS");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Tujuan Tidak Ditemukan Di System");
         }
     }
-    
+
     public void isPelayananButtonCalculate() {
-        
+
         if (comboJenisLayanan.getSelectedItem().equals("Reguler")) {
-            
+
             tarif.setOngkirBarang();
             tarif.hargaPaketReguler();
             tarif.setTotalHargaAfterInsurance();
@@ -1203,106 +1226,106 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Harga Total "
                     + df.format(tarif.getTotalHargaAfterInsurance())
                     + " Asuransi " + "(" + tarif.getInsurance().getInsuranceCetak() + ")");
-            
+
             JOptionPane.showMessageDialog(comboJenisLayanan, "Dengan Layanan "
                     + comboJenisLayanan.getSelectedItem() + " 3 - 4 Hari Pengiriman");
-            
+
         } else if (comboJenisLayanan.getSelectedItem().equals("Kilat")) {
             tarif.hargaPaketKilat();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Harga Total "
                     + df.format(tarif.getTotalHargaAfterInsurance())
                     + " Asuransi " + "(" + tarif.getInsurance().getInsuranceCetak() + ")");
-            
+
             JOptionPane.showMessageDialog(comboJenisLayanan, "Dengan Layanan "
                     + comboJenisLayanan.getSelectedItem() + " 1 - 2 Hari Pengiriman");
         } else if (comboJenisLayanan.getSelectedItem().equals("SDS")) {
             tarif.hargaPaketSDS();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Harga Total "
                     + df.format(tarif.getTotalHargaAfterInsurance())
                     + " Asuransi " + "(" + tarif.getInsurance().getInsuranceCetak() + ")");
-            
+
             JOptionPane.showMessageDialog(comboJenisLayanan, "Dengan Layanan "
                     + comboJenisLayanan.getSelectedItem() + " Sampai Pada Hari Yang Sama");
         } else if (comboJenisLayanan.getSelectedItem().equals("ONS")) {
             tarif.hargaPaketONS();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Harga Total "
                     + df.format(tarif.getTotalHargaAfterInsurance())
                     + " Asuransi " + "(" + tarif.getInsurance().getInsuranceCetak() + ")");
-            
+
             JOptionPane.showMessageDialog(comboJenisLayanan, "Dengan Layanan "
                     + comboJenisLayanan.getSelectedItem() + " One Night Service Sampai Besok Pagi");
             tarif.hargaPaketHDS();
             tarif.setOngkirBarang();
             tarif.setTotalHargaAfterInsurance();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Harga Total "
                     + df.format(tarif.getTotalHargaAfterInsurance())
                     + " Asuransi " + "(" + tarif.getInsurance().getInsuranceCetak() + ")");
-            
+
             JOptionPane.showMessageDialog(comboJenisLayanan, "Dengan Layanan "
                     + comboJenisLayanan.getSelectedItem() + " Holiday Service Dikirim Pada Hari Libur");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Tujuan Tidak Ditemukan Di System");
         }
     }
-    
+
     public void isAsuransi() {
         if (rbtnSetuju.isSelected()) {
-            
+
             tarif.setAsuransi(true);
             setHargaBarangVisible(true);
-            
+
             dpk.setHargaBarang(Double.parseDouble(textHargaBarang.getText()));
-            
+
             insurance.setInsuranceCetak("YES");
         } else if (rbtnTidak.isSelected()) {
-            
+
             tarif.setAsuransi(false);
             setHargaBarangVisible(false);
-            
+
             insurance.setInsuranceCetak("NO");
-            
+
         }
     }
-    
+
     public void isAsuransiCalculate() {
         if (rbtnSetuju.isSelected()) {
-            
+
             tarif.setAsuransi(true);
             setHargaBarangVisible(true);
             dpk.setHargaBarang(Double.parseDouble(textHargaBarang.getText()));
             insurance.setInsuranceCetak("YES");
         } else if (rbtnTidak.isSelected()) {
-            
+
             tarif.setAsuransi(false);
             setHargaBarangVisible(false);
             insurance.setInsuranceCetak("NO");
         }
     }
-    
+
     public void isAsuransiVisible() {
         if (rbtnSetuju.isSelected()) {
-            
+
             setHargaBarangVisible(true);
-            
+
         } else if (rbtnTidak.isSelected()) {
-            
+
             setHargaBarangVisible(false);
-            
+
         }
     }
-    
+
     public void fillButtonSubmit() {
-        
+
         if (textBeratBarang1.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Masukan Berat Barang!");
         } else if (textTujuanPengirimDataTujuan.getText().isEmpty()) {
@@ -1312,93 +1335,93 @@ public class GUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Masukan Harga Barang");
             }
         } else {
-            
+
             tarif.getPengirim().setBeratBarang(Integer.parseInt(textBeratBarang1.getText()));
-            
+
             try {
                 tarif.setKota(textTujuanPengirimDataTujuan.getText());
             } catch (Exception err) {
                 JOptionPane.showMessageDialog(rootPane, "Kota Tujuan Tidak Ada Pada System");
             }
-            
+
             dpk.setNamaBarang(textNamaBarang.getText());
             pengirim.setNama(textNamaPengirim.getText());
             dpk.setPembayaran(comboPembayaran.getSelectedItem().toString());
-            
+
             try {
                 dpk.setTanggalPengiriman(dateTanggalPengiriman.getDate());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "Isi Tanggal Pengiriman");
             }
-            
+
             isPelayanan();
-            
+
             textNomorPaket.setText(resiGenerator.generateResiNumber() + dpk.getKodeLayanan());
-            
+
         }
     }
-    
+
     public void fillButtonCalculate() {
-        
+
         try {
             tarif.getPengirim().setBeratBarang(Integer.parseInt(textBeratBarang1.getText()));
         } catch (NumberFormatException a) {
             JOptionPane.showMessageDialog(rootPane, "Masukan Angka Pada Berat Barang");
             return;
         }
-        
+
         try {
             tarif.setKota(textTujuanPengirimDataTujuan.getText());
         } catch (Exception err) {
             JOptionPane.showMessageDialog(rootPane, "Kota Tujuan Tidak Ada Pada System");
             return;
         }
-        
+
     }
-    
+
     public void actionClearButtonSubmit() {
         textBeratBarang1.setText("");
         textJumlah.setText("0");
         textProvinsiPengirim.setText("");
         textHargaBarang.setText("0");
-        
+
         textAreaDetailPembelian.setText("Nama Pengirim : " + "\n"
-                + "Kota Tujuan : "  + "\n"
-                + "Nama Barang : "  + "\n"
-                + "Berat Barang : "  + "\n"
+                + "Kota Tujuan : " + "\n"
+                + "Nama Barang : " + "\n"
+                + "Berat Barang : " + "\n"
                 + "Lama Pengiriman : " + "\n"
                 + "Jenis Pelayanan : " + "\n"
-                + "Asuransi : "  + "\n"
-                + "Tanggal Kirim : "  + "\n"
-                + "Pembayaran : " );
+                + "Asuransi : " + "\n"
+                + "Tanggal Kirim : " + "\n"
+                + "Pembayaran : ");
         textNomorPaket.setText("");
     }
-    
+
     public void setHargaBarangVisible(Boolean vis) {
         textHargaBarang.setVisible(vis);
         labelHargaBarang.setVisible(vis);
     }
-    
+
     public void setNamaBarangVisiblle() {
         textNamaBarang.setVisible(true);
-        
+
         labelNamaBarang.setVisible(true);
     }
-    
+
     public void setHargaBarangInvisible() {
-        
+
         textHargaBarang.setVisible(false);
-        
+
         labelHargaBarang.setVisible(false);
     }
-    
+
     public void setNamaBarangInvisible() {
-        
+
         textNamaBarang.setVisible(false);
         labelNamaBarang.setVisible(false);
-        
+
     }
-    
+
     public void setSimulasiHargaMenuVisible() {
         if (JOptionPane.showConfirmDialog(null, "Kamu Yakin Ingi Mode Simulasi Harga?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -1434,14 +1457,14 @@ public class GUI extends javax.swing.JFrame {
             //buttonGroupAsuransi
             rbtnSetuju.setEnabled(true);
             rbtnTidak.setEnabled(true);
-            
+
         } else {
             // no option
             buttonCalculate.setVisible(false);
         }
-        
+
     }
-    
+
     public void setNewDeliveryVisible() {
         panelDetailPengiriman.setVisible(true);
         textJumlah.setText("Rp0");
@@ -1474,11 +1497,11 @@ public class GUI extends javax.swing.JFrame {
         //buttonGroupAsuransi
         rbtnSetuju.setEnabled(true);
         rbtnTidak.setEnabled(true);
-        
+
         dateTanggalPengiriman.setDate(Date.from(Instant.now()));
-        
+
     }
-    
+
     public void setProvinsiKotaPengirim() {
         if (comboKotaPengirim.getSelectedItem().toString().equalsIgnoreCase("jakarta utara")) {
             textProvinsiPengirim.setText("DKI JAKARTA");
@@ -1490,12 +1513,12 @@ public class GUI extends javax.swing.JFrame {
             textProvinsiPengirim.setText("DKI JAKARTA");
         } else if (comboKotaPengirim.getSelectedItem().toString().equalsIgnoreCase("")) {
             textProvinsiPengirim.setText("");
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Kota Tidak Ditemukan Di System");
         }
     }
-    
+
     public void setProvinsiKotaPenerima() {
         if (comboKotaTujuan.getSelectedItem().toString().equalsIgnoreCase("bandung")) {
             textProvinsiPenerima.setText("JAWA BARAT");
@@ -1524,16 +1547,16 @@ public class GUI extends javax.swing.JFrame {
         } else if (comboKotaTujuan.getSelectedItem().toString().equalsIgnoreCase("timika")) {
             textProvinsiPenerima.setText("PAPUA");
             textTujuanPengirimDataTujuan.setText("Timika");
-            
+
         } else if (comboKotaTujuan.getSelectedItem().toString().equalsIgnoreCase("None")) {
             textProvinsiPenerima.setText("");
             textTujuanPengirimDataTujuan.setText("");
-            
+
         } else {
             JOptionPane.showMessageDialog(textKodePosPenerima, "Kota Tidak Ditemukan Di System");
         }
     }
-    
+
     public void setResultPengiriman() {
 //        if (textBeratBarang1.getText().isEmpty()) {
 //            JOptionPane.showMessageDialog(rootPane, "Masukan Berat Barang");
@@ -1550,17 +1573,17 @@ public class GUI extends javax.swing.JFrame {
                 + "Asuransi : " + insurance.getInsuranceCetak() + "\n"
                 + "Tanggal Kirim : " + dateformat.format(dpk.getTanggalPengiriman()) + "\n"
                 + "Pembayaran : " + dpk.getPembayaran());
-        
+
     }
-    
+
     public void isiComboKota() {
         List<Tarif> list = TarifFileDAO.getListFile();
         for (Tarif tarifs : list) {
-            
+
             comboKotaTujuan.addItem(tarifs.getKota());
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1572,21 +1595,21 @@ public class GUI extends javax.swing.JFrame {
                 if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
