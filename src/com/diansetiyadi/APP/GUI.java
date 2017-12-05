@@ -51,7 +51,7 @@ public class GUI extends javax.swing.JFrame {
         setNamaBarangInvisible();
         defaultMenu();
         isiComboKota();
-
+        //test
     }
 
     /**
